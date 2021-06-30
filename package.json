@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "^18.0.0-alpha-3e8c86c1c-20210630",
     "react-dom": "^18.0.0-alpha-3e8c86c1c-20210630",
+    "react-hot-loader": "^4.13.0",
     "three": "^0.129.0"
   },
   "devDependencies": {

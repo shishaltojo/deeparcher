@@ -5,5 +5,8 @@
   "repository": "git@github.com:alexalemanhdz/threejs-test.git",
   "author": "alexalemanhdz <alex.aleman.public@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "three": "^0.129.0"
+  }
 }

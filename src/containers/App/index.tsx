@@ -1,18 +1,14 @@
 import * as React from 'react';
 import * as THREE from 'three';
 import { hot } from 'react-hot-loader';
-import { 
-	BoxGeometry,
-	Mesh,
-	MeshNormalMaterial,
-	PerspectiveCamera,
-	Scene,
-	WebGL1Renderer
-} from 'three';
 
 const App = () => {
-	let camera:PerspectiveCamera, scene:Scene, renderer:WebGL1Renderer;
-	let geometry:BoxGeometry, material:MeshNormalMaterial, mesh:Mesh;
+	let camera:THREE.PerspectiveCamera;
+	let scene:THREE.Scene;
+	let renderer:THREE.WebGL1Renderer;
+	let geometry:THREE.BoxGeometry;
+	let material:THREE.MeshNormalMaterial;
+	let mesh:THREE.Mesh;
 
 	const init = () => {
 		

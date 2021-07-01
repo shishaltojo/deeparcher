@@ -1,14 +1,27 @@
 import * as React from 'react';
 import * as THREE from 'three';
 import { hot } from 'react-hot-loader';
+import { 
+	BoxGeometry,
+	Mesh,
+	MeshNormalMaterial,
+	PerspectiveCamera,
+	Scene,
+	WebGL1Renderer
+} from 'three';
 
 const App = () => {
-	let camera:any, scene:any, renderer:any;
-	let geometry, material, mesh:any;
+	let camera:PerspectiveCamera, scene:Scene, renderer:WebGL1Renderer;
+	let geometry:BoxGeometry, material:MeshNormalMaterial, mesh:Mesh;
 
 	const init = () => {
 		
-		camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+		camera = new THREE.PerspectiveCamera(
+			70,
+			window.innerWidth / window.innerHeight,
+			0.01,
+			10
+		);
 		camera.position.z = 1;
 
 		scene = new THREE.Scene();
@@ -18,7 +31,6 @@ const App = () => {
 		
 		mesh = new THREE.Mesh( geometry, material );
 		scene.add( mesh );
-
 		
 		renderer = new THREE.WebGL1Renderer( { antialias: true } );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -26,7 +38,7 @@ const App = () => {
 		document.body.appendChild( renderer.domElement );
 	};
 	
-	const animation = (time:any) => {
+	const animation = (time:number) => {
 		mesh.rotation.x = time / 2000;
 		mesh.rotation.y = time / 1000;
 

@@ -7,14 +7,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /(node_modules)/,
         loader: "babel-loader",
         options: { presets: ["@babel/env"] }
-      },
-      {
-        test: /\.tsx?$/,
-        loader: "babel-loader",
       },
       {
         test: /\.js$/,
@@ -23,7 +19,7 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",

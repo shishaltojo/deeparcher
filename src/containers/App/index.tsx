@@ -34,6 +34,25 @@ const App = () => {
 		document.body.appendChild( renderer.domElement );
 	};
 	
+	const cameraMovement = (e:any) => {
+		switch(e.key) {
+		case 'w': 
+			camera.position.z -= 0.01;
+			break;
+		case 'W':
+			camera.position.z -= 0.01;
+			break;
+		case 's':
+			camera.position.z += 0.01;
+			break;
+		case 'S':
+			camera.position.z += 0.01;
+			break;
+		default:
+			break;
+		}
+	};
+
 	const animation = (time:number) => {
 		mesh.rotation.x = time / 2000;
 		mesh.rotation.y = time / 1000;
@@ -42,6 +61,8 @@ const App = () => {
 	};
 
 	init();
+
+	document.addEventListener('keypress', e => cameraMovement(e));
 
 	return (
 		<div />

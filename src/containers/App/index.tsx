@@ -37,23 +37,20 @@ const App = () => {
 	const cameraMovement = (e:any) => {
 		const z = camera.position.z;
 		const x = camera.position.x;
-		const r:number = Math.sqrt(Math.pow(camera.position.z, 2) + Math.pow(camera.position.x, 2));
-		let theta:number;
 
-		if (z === 0) {
-			if (x > 0) theta = Math.PI / 2;
-			else if (x < 0) theta = - Math.PI / 2;
-			else theta = 0;
-		} else {
-			theta = Math.atan2(x, z);
-		}
+		let r:number = Math.sqrt(Math.pow(camera.position.z, 2) + Math.pow(camera.position.x, 2));
+		let theta:number = Math.atan2(x, z);
 
 		switch(e.key) {
 		case 'w': 
-			camera.position.z -= 0.01;
+			r -= 0.01;
+			camera.position.z = r * Math.cos(theta);
+			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'W':
-			camera.position.z -= 0.01;
+			r -= 0.01;
+			camera.position.z = r * Math.cos(theta);
+			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'A':
 			theta -= Math.PI / 2;
@@ -68,10 +65,14 @@ const App = () => {
 			camera.rotation.y -= Math.PI / 2;
 			break;
 		case 's':
-			camera.position.z += 0.01;
+			r += 0.01;
+			camera.position.z = r * Math.cos(theta);
+			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'S':
-			camera.position.z += 0.01;
+			r += 0.01;
+			camera.position.z = r * Math.cos(theta);
+			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'D':
 			theta -= Math.PI / 2;

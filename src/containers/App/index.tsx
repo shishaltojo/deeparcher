@@ -4,11 +4,13 @@ import { hot } from 'react-hot-loader';
 
 const App = () => {
 	let camera:THREE.PerspectiveCamera;
-	let scene:THREE.Scene;
-	let renderer:THREE.WebGL1Renderer;
 	let geometry:THREE.BoxGeometry;
-	let material:THREE.MeshNormalMaterial;
+	let ambientLight: THREE.AmbientLight;
+	let material:THREE.MeshStandardMaterial;
 	let mesh:THREE.Mesh;
+	let renderer:THREE.WebGL1Renderer;
+	let scene:THREE.Scene;
+	let pointLight: THREE.PointLight;
 
 	const init = () => {
 		
@@ -23,11 +25,18 @@ const App = () => {
 		scene = new THREE.Scene();
 		
 		geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-		material = new THREE.MeshNormalMaterial();
+		material = new THREE.MeshStandardMaterial();
 		
 		mesh = new THREE.Mesh( geometry, material );
 		scene.add( mesh );
 		
+		ambientLight = new THREE.AmbientLight( 0xb1def9, 0.1 );
+		scene.add( ambientLight );
+
+		pointLight = new THREE.PointLight( 0xff8787, 1, 0 );
+		pointLight.position.set( -50, 10, -10 );
+		scene.add( pointLight );
+
 		renderer = new THREE.WebGL1Renderer( { antialias: true } );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.setAnimationLoop( animation );

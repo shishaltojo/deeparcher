@@ -53,16 +53,16 @@ const App = () => {
 			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'A':
-			theta -= Math.PI / 2;
+			theta -= Math.PI / 180;
 			camera.position.z = r * Math.cos(theta);
 			camera.position.x = r * Math.sin(theta);
-			camera.rotation.y -= Math.PI / 2;
+			camera.rotation.y -= Math.PI / 180;
 			break;
 		case 'a':
-			theta -= Math.PI / 2;
+			theta -= Math.PI / 180;
 			camera.position.z = r * Math.cos(theta);
 			camera.position.x = r * Math.sin(theta);
-			camera.rotation.y -= Math.PI / 2;
+			camera.rotation.y -= Math.PI / 180;
 			break;
 		case 's':
 			r += 0.01;
@@ -75,26 +75,23 @@ const App = () => {
 			camera.position.x = r * Math.sin(theta);
 			break;
 		case 'D':
-			theta -= Math.PI / 2;
+			theta += Math.PI / 180;
 			camera.position.z = r * Math.cos(theta);
 			camera.position.x = r * Math.sin(theta);
-			camera.rotation.y -= Math.PI / 2;
+			camera.rotation.y += Math.PI / 180;
 			break;
 		case 'd':
-			theta -= Math.PI / 2;
+			theta += Math.PI / 180;
 			camera.position.z = r * Math.cos(theta);
 			camera.position.x = r * Math.sin(theta);
-			camera.rotation.y -= Math.PI / 2;
+			camera.rotation.y += Math.PI / 180;
 			break;
 		default:
 			break;
 		}
 	};
 
-	const animation = (time:number) => {
-		mesh.rotation.x = time / 2000;
-		mesh.rotation.y = time / 1000;
-
+	const animation = () => {
 		renderer.render( scene, camera );
 	};
 

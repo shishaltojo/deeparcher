@@ -22,23 +22,7 @@ const App = () => {
 	const rt = new THREE.TextureLoader().load('../../textures/Daylight Box_Right.bmp');
 	const lf = new THREE.TextureLoader().load('../../textures/Daylight Box_Left.bmp');
 
-	const createPathStrings = (
-		basePath:string,
-		filename:string,
-		sides:Array<string>,
-		fileType:string,
-	):Array<string> => {
-		const baseFilename = basePath + filename;
-
-		const pathStrings = sides.map(side => {
-			return baseFilename + '_' + side + fileType;
-		});
-
-		return pathStrings;
-	};
-
-	const init = () => {
-		
+	const init = () => {	
 		camera = new THREE.PerspectiveCamera(
 			70,
 			window.innerWidth / window.innerHeight,

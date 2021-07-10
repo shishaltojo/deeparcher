@@ -12,13 +12,38 @@ const App = () => {
 	let scene:THREE.Scene;
 	let pointLight: THREE.PointLight;
 
+	let skyboxGeo: THREE.BoxGeometry;
+	let skybox: THREE.Mesh;
+
+	const ft = new THREE.TextureLoader().load('../../textures/Daylight Box_Front.bmp');
+	const bk = new THREE.TextureLoader().load('../../textures/Daylight Box_Back.bmp');
+	const up = new THREE.TextureLoader().load('../../textures/Daylight Box_Top.bmp');
+	const dn = new THREE.TextureLoader().load('../../textures/Daylight Box_Bottom.bmp');
+	const rt = new THREE.TextureLoader().load('../../textures/Daylight Box_Right.bmp');
+	const lf = new THREE.TextureLoader().load('../../textures/Daylight Box_Left.bmp');
+
+	const createPathStrings = (
+		basePath:string,
+		filename:string,
+		sides:Array<string>,
+		fileType:string,
+	):Array<string> => {
+		const baseFilename = basePath + filename;
+
+		const pathStrings = sides.map(side => {
+			return baseFilename + '_' + side + fileType;
+		});
+
+		return pathStrings;
+	};
+
 	const init = () => {
 		
 		camera = new THREE.PerspectiveCamera(
 			70,
 			window.innerWidth / window.innerHeight,
 			0.01,
-			10
+			30000
 		);
 		camera.position.z = 1;
 
@@ -36,6 +61,10 @@ const App = () => {
 		pointLight = new THREE.PointLight( 0xff8787, 1, 0 );
 		pointLight.position.set( -50, 10, -10 );
 		scene.add( pointLight );
+
+		skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
+		skybox = new THREE.Mesh(skyboxGeo);
+		scene.add(skybox);
 
 		renderer = new THREE.WebGL1Renderer( { antialias: true } );
 		renderer.setSize( window.innerWidth, window.innerHeight );

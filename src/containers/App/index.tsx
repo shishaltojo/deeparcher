@@ -23,12 +23,12 @@ const App = () => {
 	const lf = new THREE.TextureLoader().load('../../textures/Daylight Box_Left.bmp');
 
 	const materialArray = [
-		new THREE.MeshBasicMaterial({ map: ft, side: THREE.BackSide }),
-		new THREE.MeshBasicMaterial({ map: bk, side: THREE.BackSide }),
-		new THREE.MeshBasicMaterial({ map: up, side: THREE.BackSide }),
-		new THREE.MeshBasicMaterial({ map: dn, side: THREE.BackSide }),
-		new THREE.MeshBasicMaterial({ map: rt, side: THREE.BackSide }),
-		new THREE.MeshBasicMaterial({ map: lf, side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
 	];
 
 	const init = () => {	

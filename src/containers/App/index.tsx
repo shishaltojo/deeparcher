@@ -15,20 +15,13 @@ const App = () => {
 	let skyboxGeo: THREE.BoxGeometry;
 	let skybox: THREE.Mesh;
 
-	const ft = new THREE.TextureLoader().load('../../textures/Daylight Box_Front.bmp');
-	const bk = new THREE.TextureLoader().load('../../textures/Daylight Box_Back.bmp');
-	const up = new THREE.TextureLoader().load('../../textures/Daylight Box_Top.bmp');
-	const dn = new THREE.TextureLoader().load('../../textures/Daylight Box_Bottom.bmp');
-	const rt = new THREE.TextureLoader().load('../../textures/Daylight Box_Right.bmp');
-	const lf = new THREE.TextureLoader().load('../../textures/Daylight Box_Left.bmp');
-
 	const materialArray = [
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
-		new THREE.MeshStandardMaterial({ side: THREE.BackSide }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0x7e2065 }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0xf46c70 }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0xec3b72 }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0xec3b72 }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0xec3b72 }),
+		new THREE.MeshStandardMaterial({ side: THREE.BackSide, color: 0xec3b72 }),
 	];
 
 	const init = () => {	
@@ -48,10 +41,10 @@ const App = () => {
 		mesh = new THREE.Mesh( geometry, material );
 		scene.add( mesh );
 		
-		ambientLight = new THREE.AmbientLight( 0xb1def9, 0.1 );
+		ambientLight = new THREE.AmbientLight( 0xec3b72, 0.5 );
 		scene.add( ambientLight );
 
-		pointLight = new THREE.PointLight( 0xff8787, 1, 0 );
+		pointLight = new THREE.PointLight( 0xf46c70, 0.5, 0 );
 		pointLight.position.set( -50, 10, -10 );
 		scene.add( pointLight );
 

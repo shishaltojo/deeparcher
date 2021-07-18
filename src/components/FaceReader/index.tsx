@@ -16,7 +16,6 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import Loader from '../Loader';
-import bestoTwice from '../../images/bestoTwice.jpg';
 
 const FaceReaderContainer = styled.div`
   display: flex;
@@ -34,7 +33,7 @@ const FaceReaderContainer = styled.div`
 `;
 
 const FaceReader = () => {
-	const faceReader = useRef(null);
+	const video = useRef(null);
 	const canvas = useRef(null);
 	const [result, setResult] = useState(null);
 
@@ -56,13 +55,20 @@ const FaceReader = () => {
 	};
 
 	useEffect(() => {
-		printFaceLandmarks(faceReader);
+		navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+			.then(stream => {
+				video.current.srcObject = stream;
+				video.current.play();
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	}, []);
 
 	useEffect(() => {
 		const displaySize = {
-			width: faceReader.current.width,
-			height: faceReader.current.height
+			width: video.current.width,
+			height: video.current.height
 		};
 		canvas.current.width = displaySize.width;
 		canvas.current.height = displaySize.height;
@@ -83,7 +89,7 @@ const FaceReader = () => {
 					null :
 					<Loader message="Detecting faces..." />
 			}
-			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
+			<video ref={video} width="400" height="300" onLoadedMetadata={() => printFaceLandmarks(video)} ></video>
 			<canvas ref={canvas} />
 		</FaceReaderContainer>
 	);

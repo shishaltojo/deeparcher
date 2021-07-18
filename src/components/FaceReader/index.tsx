@@ -1,7 +1,17 @@
-import React, { useRef, useEffect } from 'react';
+import React, {
+	useRef,
+	useEffect,
+	useState
+} from 'react';
 import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
-import { detectSingleFace, nets } from 'face-api.js';
+import {
+	nets,
+	detectSingleFace,
+	matchDimensions,
+	resizeResults,
+	draw
+} from 'face-api.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -21,6 +31,7 @@ const FaceReaderContainer = styled.div`
 const FaceReader = () => {
 	const faceReader = useRef(null);
 	const canvas = useRef(null);
+	const [result, setResult] = useState(null);
 
 	const printFaceLandmarks = async (ref:any) => {
 		(async () => {
@@ -32,13 +43,16 @@ const FaceReader = () => {
 				detectSingleFace(ref.current)
 					.withFaceLandmarks()
 					.withFaceDescriptor()
-					.then(result => console.log(result));
+					.then(r => setResult(r));
 			})
 			.catch(err => {
 				console.log(err);
 			});
-
 	};
+
+	useEffect(() => {
+		printFaceLandmarks(faceReader);
+	}, []);
 
 	useEffect(() => {
 		const displaySize = {
@@ -46,9 +60,13 @@ const FaceReader = () => {
 			height: faceReader.current.height
 		};
 
-		printFaceLandmarks(faceReader);
-		console.log(displaySize);
-	}, []);
+		matchDimensions(displaySize, canvas.current);
+
+		if (result) {
+			const resizedDetections = resizeResults(result, displaySize);
+			draw.drawDetections(canvas.current, resizedDetections);
+		}
+	}, [result]);
 
 	return (
 		<FaceReaderContainer>

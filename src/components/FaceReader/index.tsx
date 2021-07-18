@@ -20,14 +20,18 @@ const FaceReaderContainer = styled.div`
 
 const FaceReader = () => {
 	const faceReader = useRef(null);
-  
+	const canvas = useRef(null);
+
 	const printFaceLandmarks = async (ref:any) => {
 		(async () => {
 			await nets.ssdMobilenetv1.loadFromUri('/models');
 			await nets.faceLandmark68Net.loadFromUri('/models');
+			await nets.faceRecognitionNet.loadFromUri('/models');
 		})()
 			.then(() => {
-				detectSingleFace(ref.current).withFaceLandmarks()
+				detectSingleFace(ref.current)
+					.withFaceLandmarks()
+					.withFaceDescriptor()
 					.then(result => console.log(result));
 			})
 			.catch(err => {
@@ -37,12 +41,19 @@ const FaceReader = () => {
 	};
 
 	useEffect(() => {
+		const displaySize = {
+			width: faceReader.current.width,
+			height: faceReader.current.height
+		};
+
 		printFaceLandmarks(faceReader);
+		console.log(displaySize);
 	}, []);
 
 	return (
 		<FaceReaderContainer>
 			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
+			<canvas ref={canvas} />
 		</FaceReaderContainer>
 	);
 };

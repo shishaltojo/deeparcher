@@ -15,6 +15,7 @@ import {
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import Loader from '../Loader';
 import bestoTwice from '../../images/bestoTwice.jpg';
 
 const FaceReaderContainer = styled.div`
@@ -76,6 +77,11 @@ const FaceReader = () => {
 
 	return (
 		<FaceReaderContainer>
+			{
+				result ?
+					null :
+					<Loader message="Detecting faces..." />
+			}
 			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
 			<canvas ref={canvas} />
 		</FaceReaderContainer>

@@ -63,6 +63,8 @@ const FaceReader = () => {
 			width: faceReader.current.width,
 			height: faceReader.current.height
 		};
+		canvas.current.width = displaySize.width;
+		canvas.current.height = displaySize.height;
 
 		matchDimensions(displaySize, canvas.current);
 
@@ -75,10 +77,7 @@ const FaceReader = () => {
 	return (
 		<FaceReaderContainer>
 			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
-			<canvas ref={canvas} style={{
-				height: faceReader.current.height,
-				width: faceReader.current.width
-			}} />
+			<canvas ref={canvas} />
 		</FaceReaderContainer>
 	);
 };

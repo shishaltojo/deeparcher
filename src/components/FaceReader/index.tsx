@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef. useEffect } from 'react';
 import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
+import { detectSingleFace } from 'face-api.js';
 
 import bestoTwice from '../../images/bestoTwice.jpg';
 
@@ -16,9 +17,20 @@ const FaceReaderContainer = styled.div`
 `;
 
 const FaceReader = () => {
+  const faceReader = useRef(null);
+  
+  const printFaceLandmarks = async (ref:any) => {
+    const detectionsWithLandmarks = await detectSingleFace(ref.current).withFaceLandmarks();
+    console.log(detectionsWithLandmarks);
+  }
+
+  useEffect(() => {
+    printFaceLandmarks(faceReader);
+  }, [])
+
 	return (
 		<FaceReaderContainer>
-			<img src={bestoTwice} alt="besto twice" />
+			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
 		</FaceReaderContainer>
 	);
 };

@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
 import { detectSingleFace } from 'face-api.js';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import bestoTwice from '../../images/bestoTwice.jpg';
 

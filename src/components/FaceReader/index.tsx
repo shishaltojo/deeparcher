@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
-import { detectSingleFace } from 'face-api.js';
+import { detectSingleFace, nets } from 'face-api.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -22,8 +22,18 @@ const FaceReader = () => {
 	const faceReader = useRef(null);
   
 	const printFaceLandmarks = async (ref:any) => {
-		const detectionsWithLandmarks = await detectSingleFace(ref.current).withFaceLandmarks();
-		console.log(detectionsWithLandmarks);
+		nets.ssdMobilenetv1.loadFromUri('/models')
+			.then(() => {
+				detectSingleFace(ref.current).withFaceLandmarks();
+			})
+			.then(result => {
+				console.log('Cho mama');
+				console.log(result);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+
 	};
 
 	useEffect(() => {

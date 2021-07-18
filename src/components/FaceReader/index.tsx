@@ -22,13 +22,13 @@ const FaceReader = () => {
 	const faceReader = useRef(null);
   
 	const printFaceLandmarks = async (ref:any) => {
-		nets.ssdMobilenetv1.loadFromUri('/models')
+		(async () => {
+			await nets.ssdMobilenetv1.loadFromUri('/models');
+			await nets.faceLandmark68Net.loadFromUri('/models');
+		})()
 			.then(() => {
-				detectSingleFace(ref.current).withFaceLandmarks();
-			})
-			.then(result => {
-				console.log('Cho mama');
-				console.log(result);
+				detectSingleFace(ref.current).withFaceLandmarks()
+					.then(result => console.log(result));
 			})
 			.catch(err => {
 				console.log(err);

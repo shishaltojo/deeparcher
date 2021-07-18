@@ -72,6 +72,7 @@ const FaceReader = () => {
 		if (result) {
 			const resizedDetections = resizeResults(result, displaySize);
 			draw.drawDetections(canvas.current, resizedDetections);
+			draw.drawFaceLandmarks(canvas.current, resizedDetections);
 		}
 	}, [result]);
 

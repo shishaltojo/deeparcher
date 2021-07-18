@@ -18,7 +18,7 @@ module.exports = {
 				enforce: 'pre'
 			},
 			{
-				test: /\.bmp/,
+				test: /\.(bmp|jpg)/,
 				use: ['url-loader']
 			}
 		]

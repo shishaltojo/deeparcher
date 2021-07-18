@@ -1,4 +1,4 @@
-import React, { useRef. useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
 import { detectSingleFace } from 'face-api.js';
@@ -17,16 +17,16 @@ const FaceReaderContainer = styled.div`
 `;
 
 const FaceReader = () => {
-  const faceReader = useRef(null);
+	const faceReader = useRef(null);
   
-  const printFaceLandmarks = async (ref:any) => {
-    const detectionsWithLandmarks = await detectSingleFace(ref.current).withFaceLandmarks();
-    console.log(detectionsWithLandmarks);
-  }
+	const printFaceLandmarks = async (ref:any) => {
+		const detectionsWithLandmarks = await detectSingleFace(ref.current).withFaceLandmarks();
+		console.log(detectionsWithLandmarks);
+	};
 
-  useEffect(() => {
-    printFaceLandmarks(faceReader);
-  }, [])
+	useEffect(() => {
+		printFaceLandmarks(faceReader);
+	}, []);
 
 	return (
 		<FaceReaderContainer>

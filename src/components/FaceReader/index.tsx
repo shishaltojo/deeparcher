@@ -26,6 +26,10 @@ const FaceReaderContainer = styled.div`
   &>img {
     max-height: 80vh;
   }
+
+	&>canvas {
+		position: absolute;
+	}
 `;
 
 const FaceReader = () => {
@@ -71,7 +75,10 @@ const FaceReader = () => {
 	return (
 		<FaceReaderContainer>
 			<img ref={faceReader} src={bestoTwice} alt="besto twice" />
-			<canvas ref={canvas} />
+			<canvas ref={canvas} style={{
+				height: faceReader.current.height,
+				width: faceReader.current.width
+			}} />
 		</FaceReaderContainer>
 	);
 };
